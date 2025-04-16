@@ -6,22 +6,23 @@ import Logo from '@/assets/images/logo.png';
 import { navigationItem } from "@/core/navigation/navigation_item";
 import { useRouter, usePathname } from "next/navigation";
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from "../ui/breadcrumb";
+import * as Icon from 'react-bootstrap-icons';
 
 export const AdminLayout = ({ children }: { children: ReactNode }): React.ReactElement => {
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(true);
   const router = useRouter();
   const pathname = usePathname();
 
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  }
+
   return <>
     <div className="bg-gray-50">
-      <div className="lg:ps-[320px] sticky top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-[48] w-full bg-background border-b-1 text-sm py-5">
+      <div className={`${isSidebarOpen ? 'lg:ps-[320px]' : 'lg:ps-0'} sticky top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-[48] w-full bg-background border-b-1 text-sm py-5`}>
         <nav className="relative px-5 flex basis-full items-center w-full mx-auto">
           <div className="me-5 shrink-0">
-            <Input
-              id="search"
-              type="text"
-              placeholder="Search..."
-              required
-            />
+            <Icon.List onClick={toggleSidebar} className="size-8 cursor-pointer"/>
           </div>
           <div className="w-full flex items-stretch justify-end ms-auto gap-x-1 md:gap-x-3">
             <div className="flex flex-row items-stretch justify-end gap-1">
@@ -36,7 +37,7 @@ export const AdminLayout = ({ children }: { children: ReactNode }): React.ReactE
       </div>
     </div>
     
-    <div className="block end-auto bottom-0 translate-x-0 left-0 transition-all duration-300 transform h-full fixed inset-y-0 start-0 z-[60] bg-background border-e-1 border-black">
+    <div style={{ left: isSidebarOpen ? "0px" : "-320px" }} className={`${isSidebarOpen ? 'block end-auto bottom-0 translate-x-0' : ''} left-0 transition-all duration-300 transform h-full fixed inset-y-0 start-0 z-[60] bg-background border-e-1 border-black`}>
       <div className="relative flex h-full max-h-full w-[320px] flex-col">
         <div className="flex items-center justify-center border-b-1 border-black px-6 py-[20.5px]">
           <a className="flex items-center gap-x-2">
@@ -66,7 +67,7 @@ export const AdminLayout = ({ children }: { children: ReactNode }): React.ReactE
       </div>
     </div>
     <div
-      className="w-full lg:ps-[320px]">
+      className={`w-full ${isSidebarOpen ? 'lg:ps-[320px]' : ''}`}>
       <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
         <main>
           <Breadcrumb>
