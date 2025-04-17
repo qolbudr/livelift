@@ -18,7 +18,7 @@ import { toast } from "sonner";
 import { handleError } from "@/core/utils/handle_error";
 import { MediaRepository } from "@/core/repository/media_repository";
 
-export const DialogAddMedia = (): JSX.Element => {
+export const DialogAddMedia = ({onAdd}: {onAdd: () => void}): JSX.Element => {
   const [isOpen, setOpen] = useState<boolean>();
   const [isLoading, setLoading] = useState(false);
 
@@ -34,6 +34,7 @@ export const DialogAddMedia = (): JSX.Element => {
       const response = await MediaRepository.addMedia({ title, description, video: file });
       setLoading(false);
       setOpen(false);
+      onAdd();
       toast.success(response.message);
     } catch (e) {
       setLoading(false);

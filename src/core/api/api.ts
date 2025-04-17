@@ -1,5 +1,6 @@
 import { generateURLQueryParam } from "@/core/utils/generate_query_params";
 import CryptoJS from "crypto-js";
+import { getTenantUrl } from "../utils/tenant_url";
 
 export enum ApiMethod {
   GET = 'GET',
@@ -48,19 +49,12 @@ export async function api<Type>({url, path, method, headers, body, query}: ApiPa
 export async function apiTenant<Type>({url, path, method, headers, body, query}: ApiParameter<Type>): Promise<Type | undefined> {
   try {
     const token = localStorage.getItem('token');
-    const user = localStorage.getItem('user');
-    const userData = user ? JSON.parse(user) : null;
-    const tenant = userData?.tenant;
-    // const iv = CryptoJS.AES.encrypt('tai', process.env.SECRET_KEY!).toString()
+    const tenant = getTenantUrl();
     
     let newUrl = url ?? `${path}`;
-
+    newUrl = `${tenant}${newUrl}`;
     if (query != null) newUrl += `?${generateURLQueryParam({ body: query })}`;
-
-    newUrl += `${tenant}${newUrl}`;
-
-    alert(newUrl)
-
+    
     const response = await fetch(newUrl, {
       method: method,
       headers: {
