@@ -14,17 +14,31 @@ import {
 } from "@/components/ui/dialog"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea";
+import { toast } from "sonner";
+import { handleError } from "@/core/utils/handle_error";
+import { MediaRepository } from "@/core/repository/media_repository";
 
 export const DialogAddMedia = (): JSX.Element => {
   const [isOpen, setOpen] = useState<boolean>();
+  const [isLoading, setLoading] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    alert(1);
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const data = Object.fromEntries(formData.entries());
-    console.log(data);
-    setOpen(false);
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    try {
+      setLoading(true);
+      event.preventDefault();
+      const form = event.target as HTMLFormElement;
+      const formData = new FormData(form);
+      const title = formData.get('title') as string;
+      const description = formData.get('description') as string;
+      const file = formData.get('video') as File;
+      const response = await MediaRepository.addMedia({ title, description, video: file });
+      setLoading(false);
+      setOpen(false);
+      toast.success(response.message);
+    } catch (e) {
+      setLoading(false);
+      toast.error(handleError(e))
+    }
   }
 
   return (
@@ -44,7 +58,7 @@ export const DialogAddMedia = (): JSX.Element => {
           <div className="grid gap-4">
             <div className="grid gap-3">
               <Label htmlFor="title">Judul</Label>
-              <Input id="title" name="name" required />
+              <Input id="title" name="title" required />
             </div>
             <div className="grid gap-3">
               <Label htmlFor="description">Deskripsi</Label>
@@ -52,14 +66,14 @@ export const DialogAddMedia = (): JSX.Element => {
             </div>
             <div className="grid gap-3">
               <Label htmlFor="title">Judul</Label>
-              <Input type="file" id="title" name="name" required />
+              <Input type="file" id="title" name="video" accept="video/*" required />
             </div>
           </div>
           <DialogFooter>
             <DialogClose asChild>
-              <Button variant="neutral">Batal</Button>
+              <Button type="button" variant="neutral">Batal</Button>
             </DialogClose>
-            <Button type="submit">Tambah Media</Button>
+            <Button disabled={isLoading} type="submit">{ isLoading ? 'Loading...' : 'Tambah Media' }</Button>
           </DialogFooter>
         </form>
       </DialogContent>

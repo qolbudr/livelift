@@ -13,7 +13,7 @@ const Login = () => {
   const router = useRouter();
   const [isLoading, setLoading] = useState(false);
 
-  const onSubmitHandler = async (event: FormEvent) => {
+  const handleSubmit = async (event: FormEvent) => {
     try {
       setLoading(true);
       event.preventDefault();
@@ -35,7 +35,7 @@ const Login = () => {
     <GuestCtxProvider>
       <div className="flex flex-col items-center justify-center h-screen">
         <div className="px-3 md:px-0 max-w-[400px] w-full">
-          <form onSubmit={onSubmitHandler}>
+          <form onSubmit={handleSubmit}>
             <Card className="w-full">
               <CardHeader>
                 <CardTitle>Login to your account</CardTitle>
