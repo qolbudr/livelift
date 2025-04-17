@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Packages {
+  id                    Int               @id @default(autoincrement())
+  name                  String
+  max_stream            Int
+  max_quality           Int
+  video_looping         Boolean
+  watermark             Boolean
+  custom_logo           Boolean
+  scheduling            Boolean
+  price                 Int
+  users                 Users[]
+}
+
+model Users {
+  id                    Int               @id @default(autoincrement())
+  email                 String            @unique
+  name                  String
+  password              String
+  phone                 String
+  package               Packages           @relation(fields: [packageId], references: [id])
+  packageId             Int
+  tenant                String
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @default(now())
+}
+

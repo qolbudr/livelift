@@ -1,0 +1,10 @@
+[
+  {
+      "email": "admin@gmail.com",
+      "name": "Administrator",
+      "password": "",
+      "phone": "81111111111",
+      "packageId": 1,
+      "tenant": "http://127.0.0.1:5000"
+  }
+]

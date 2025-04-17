@@ -1,0 +1,12 @@
+[
+  {
+      "name": "Free",
+      "max_stream": 1,
+      "max_quality": 480,
+      "video_looping": false,
+      "watermark": true,
+      "custom_logo": false,
+      "scheduling": false,
+      "price": 0
+  }
+]

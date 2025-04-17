@@ -2,62 +2,92 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label"
+import { GuestCtxProvider } from "@/core/provider/guest_context_provider";
+import { AuthRepository } from "@/core/repository/auth_repository";
+import { handleError } from "@/core/utils/handle_error";
+import { useRouter } from "next/navigation";
+import { FormEvent, useState } from "react";
+import { toast } from "sonner";
 
 const Login = () => {
+  const router = useRouter();
+  const [isLoading, setLoading] = useState(false);
+
+  const onSubmitHandler = async (event: FormEvent) => {
+    try {
+      setLoading(true);
+      event.preventDefault();
+      const form = event.target as HTMLFormElement;
+      const formData = new FormData(form);
+      const email = formData.get('email') as string;
+      const password = formData.get('password') as string;
+      const response = await AuthRepository.login(email, password);
+      setLoading(false);
+      router.push('/app/dashboard');
+    }
+    catch (e) {
+      setLoading(false);
+      toast.error(handleError(e))
+    }
+  };
+
   return (
-    <div className="flex flex-col items-center justify-center h-screen">
-      <div className="px-3 md:px-0 max-w-[400px] w-full">
-        <Card className="w-full">
-          <CardHeader>
-            <CardTitle>Login to your account</CardTitle>
-            <CardDescription>
-              Enter your email below to login to your account
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form>
-              <div className="flex flex-col gap-6">
-                <div className="grid gap-2">
-                  <Label htmlFor="email">Email</Label>
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="m@example.com"
-                    required
-                  />
-                </div>
-                <div className="grid gap-2">
-                  <div className="flex items-center">
-                    <Label htmlFor="password">Password</Label>
-                    <a
-                      href="#"
-                      className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                    >
-                      Forgot your password?
-                    </a>
+    <GuestCtxProvider>
+      <div className="flex flex-col items-center justify-center h-screen">
+        <div className="px-3 md:px-0 max-w-[400px] w-full">
+          <form onSubmit={onSubmitHandler}>
+            <Card className="w-full">
+              <CardHeader>
+                <CardTitle>Login to your account</CardTitle>
+                <CardDescription>
+                  Enter your email below to login to your account
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <div className="flex flex-col gap-6">
+                  <div className="grid gap-2">
+                    <Label htmlFor="email">Email</Label>
+                    <Input
+                      id="email"
+                      type="email"
+                      name="email"
+                      placeholder="email@example.com"
+                      required
+                    />
                   </div>
-                  <Input id="password" type="password" required />
+                  <div className="grid gap-2">
+                    <div className="flex items-center">
+                      <Label htmlFor="password">Password</Label>
+                      <a
+                        href="#"
+                        className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+                      >
+                        Forgot your password?
+                      </a>
+                    </div>
+                    <Input id="password" type="password" name="password" placeholder="******" required />
+                  </div>
                 </div>
-              </div>
-            </form>
-          </CardContent>
-          <CardFooter className="flex-col gap-2">
-            <Button type="submit" className="w-full">
-              Login
-            </Button>
-            <Button variant="neutral" className="w-full">
-              Login with Google
-            </Button>
-            <div className="mt-4 text-center text-sm">
-              Don&apos;t have an account?{" "}
-              <a href="#" className="underline underline-offset-4">
-                Sign up
-              </a>
-            </div>
-          </CardFooter>
-        </Card>
+              </CardContent>
+              <CardFooter className="flex-col gap-2">
+                <Button disabled={isLoading} type="submit" className="w-full">
+                  {isLoading ? 'Loading...' : 'Login'}
+                </Button>
+                <Button type="button" onClick={() => { }} variant="neutral" className="w-full">
+                  Login with Google
+                </Button>
+                <div className="mt-4 text-center text-sm">
+                  Don&apos;t have an account?{" "}
+                  <a href="#" className="underline underline-offset-4">
+                    Sign up
+                  </a>
+                </div>
+              </CardFooter>
+            </Card>
+          </form>
+        </div>
       </div>
-    </div>
+    </GuestCtxProvider>
   );
 }
 
