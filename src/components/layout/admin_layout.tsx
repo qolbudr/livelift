@@ -18,7 +18,7 @@ export const AdminLayout = ({ children }: { children: ReactNode }): JSX.Element 
   }
 
   const navigate = (href: string) => {
-    if(window.innerWidth < 1024) setIsSidebarOpen(false);
+    if (window.innerWidth < 1024) setIsSidebarOpen(false);
     router.push(href);
   }
 
@@ -26,9 +26,14 @@ export const AdminLayout = ({ children }: { children: ReactNode }): JSX.Element 
     <div className="bg-gray-50">
       <div className={`${isSidebarOpen ? 'lg:ps-[320px]' : 'lg:ps-0'} fixed top-0 inset-x-0 flex flex-wrap md:justify-start md:flex-nowrap z-[48] w-full bg-background border-b-1 text-sm py-5`}>
         <nav className="relative px-5 flex basis-full items-center w-full mx-auto">
-          <div className="me-5 shrink-0">
-            <Icon.List onClick={toggleSidebar} className="size-6 lg:size-8 cursor-pointer"/>
+          <div className="me-5 lg:shrink-0 w-full lg:w-auto">
+            <Icon.List onClick={toggleSidebar} className="size-6 lg:size-8 cursor-pointer" />
           </div>
+
+          <div className="w-full text-center lg:hidden gap-x-2">
+            <img src={Logo.src} alt="hris-logo" className="w-24 inline-flex" />
+          </div>
+
           <div className="w-full flex items-stretch justify-end ms-auto gap-x-1 md:gap-x-3">
             <div className="flex flex-row items-stretch justify-end gap-1">
               <div className="border-l h-full border-black mx-3.5" />
@@ -41,7 +46,7 @@ export const AdminLayout = ({ children }: { children: ReactNode }): JSX.Element 
         </nav>
       </div>
     </div>
-    
+
     <div style={{ left: isSidebarOpen ? "0px" : "-320px" }} className={`${isSidebarOpen ? 'block end-auto bottom-0 translate-x-0' : ''} left-0 transition-all duration-300 transform h-full fixed inset-y-0 start-0 z-[60] bg-background border-e-1 border-black top-[73px] lg:top-0`}>
       <div className="relative flex h-full max-h-full w-[320px] flex-col">
         <div className="hidden lg:flex items-center justify-center border-b-1 border-black px-6 py-[20.5px]">
@@ -73,7 +78,7 @@ export const AdminLayout = ({ children }: { children: ReactNode }): JSX.Element 
     </div>
     <div
       className={`w-full ${isSidebarOpen ? 'lg:ps-[320px]' : ''}`}>
-      <div className="p-4 sm:p-6 space-y-4 sm:space-y-6">
+      <div className="p-4 sm:p-6 space-y-4 sm:space-y-6 mt-[73px] lg:mt-[81px]">
         <main>
           <Breadcrumb>
             <BreadcrumbList>
