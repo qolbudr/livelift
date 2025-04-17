@@ -3,6 +3,18 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { JSX } from "react";
 import * as Icon from "react-bootstrap-icons";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog"
+import { Input } from "@/components/ui/input"
+import { DialogAddMedia } from "@/components/dialog/dialog_add_media";
 
 const Media = (): JSX.Element => {
   return <>
@@ -14,7 +26,7 @@ const Media = (): JSX.Element => {
               <Icon.JournalAlbum className="size-[50px] " />
             </div>
             <Label className="block mb-3 mt-5 text-xl">Belum Ada Media</Label>
-            <Button>Tambah Media</Button>
+            <DialogAddMedia/>
           </div>
         </div>
       </CardContent>
