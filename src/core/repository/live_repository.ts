@@ -21,6 +21,25 @@ export class LiveRepository {
     }
   };
 
+  static startLive = async ({ id, title, videoId, streamKey, rtmpUrl }: { id: number, title: string, videoId: number, streamKey: string, rtmpUrl: string }): Promise<MainReponse<undefined>> => {
+    try {
+      const response = await apiTenant<MainReponse<undefined>>({
+        url: '/api/live/' +  id,
+        method: ApiMethod.PATCH,
+        body: {
+          title: title,
+          videoId: Number(videoId),
+          streamKey: streamKey,
+          rtmpUrl: rtmpUrl,
+        }
+      });
+
+      return response!;
+    } catch (e) {
+      throw e;
+    }
+  };
+
   static getLive = async (): Promise<MainReponse<Live[]> | undefined> => {
     try {
       const response = await apiTenant<MainReponse<Live[]>>({
@@ -29,6 +48,19 @@ export class LiveRepository {
       });
 
       return response;
+    } catch (e) {
+      throw e;
+    }
+  };
+
+  static stopLive = async (live: Live): Promise<MainReponse<undefined>> => {
+    try {
+      const response = await apiTenant<MainReponse<undefined>>({
+        url: '/api/live/' + live.id + '/stop',
+        method: ApiMethod.GET,
+      });
+
+      return response!;
     } catch (e) {
       throw e;
     }
