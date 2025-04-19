@@ -20,7 +20,7 @@ export const navigationItem: NavigationItem[] = [
   },
   {
     icon: <Icon.Record2 className='size-6' />,
-    href: "/app/generate",
+    href: "/app/live",
     label: "Live Stream",
   },
   {
