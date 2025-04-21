@@ -21,7 +21,7 @@ export class LiveRepository {
     }
   };
 
-  static startLive = async ({ id, title, videoId, streamKey, rtmpUrl }: { id: number, title: string, videoId: number, streamKey: string, rtmpUrl: string }): Promise<MainReponse<undefined>> => {
+  static startLive = async ({ id, title, videoId, streamKey, rtmpUrl, loop, scheduleAt }: { id: number, title: string, videoId: number, streamKey: string, rtmpUrl: string, loop: Boolean, scheduleAt: Date | null }): Promise<MainReponse<undefined>> => {
     try {
       const response = await apiTenant<MainReponse<undefined>>({
         url: '/api/live/' +  id,
@@ -31,6 +31,8 @@ export class LiveRepository {
           videoId: Number(videoId),
           streamKey: streamKey,
           rtmpUrl: rtmpUrl,
+          loop: loop,
+          scheduleAt: scheduleAt,
         }
       });
 

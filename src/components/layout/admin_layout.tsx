@@ -64,7 +64,7 @@ export const AdminLayout = ({ children }: { children: ReactNode }): JSX.Element 
                   const isActive = pathname.includes(item.href);
 
                   return <li key={index}>
-                    <a onClick={() => navigate(item.href)} className={`cursor-pointer flex transition-all duration-200 bg-background items-center gap-x-2 px-4 py-2.5 border-1 ${isActive && 'border-1 shadow-shadow -translate-y-0.5 bg-main'} font-base rounded-sm`}>
+                    <a onClick={ item.onClick ? () => item.onClick!() : () => navigate(item.href)} className={`cursor-pointer flex transition-all duration-200 bg-background items-center gap-x-2 px-4 py-2.5 border-1 ${isActive && 'border-1 shadow-shadow -translate-y-0.5 bg-main'} font-base rounded-sm`}>
                       {item.icon}
                       {item.label}
                     </a>

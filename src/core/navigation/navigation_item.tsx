@@ -27,5 +27,14 @@ export const navigationItem: NavigationItem[] = [
     icon: <Icon.ClockHistory />,
     href: "/app/generate",
     label: "History",
+  },
+  {
+    icon: <Icon.Power />,
+    href: "/app/generate",
+    label: "Logout",
+    onClick: () => {
+      localStorage.clear();
+      window.location.href = "/login";
+    }
   }
 ]
