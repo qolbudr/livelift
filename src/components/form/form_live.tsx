@@ -10,6 +10,8 @@ import { toast } from "sonner";
 import { handleError } from "@/core/utils/handle_error";
 import { LiveRepository } from "@/core/repository/live_repository";
 import { DialogConfirmation } from "@/components/dialog/dialog_confirmation";
+import tz from '@/core/utils/timezone';
+import moment from "moment-timezone";
 
 export const FormLive = ({ item, getLive }: { item: Live, getLive: () => void }): JSX.Element => {
   const [isLoop, setLoop] = useState<boolean>(item.loop ? true : false);
@@ -27,8 +29,7 @@ export const FormLive = ({ item, getLive }: { item: Live, getLive: () => void })
       const streamKey = formData.get('stream_key') as string;
       const rtmpUrl = formData.get('rtmp_url') as string;
       const scheduleAt = formData.get('schedule_at') as string | null;
-      alert(scheduleAt);
-      await startLive(live, streamKey, rtmpUrl, isLoop, scheduleAt ? new Date(scheduleAt) : null);
+      await startLive(live, streamKey, rtmpUrl, isLoop, scheduleAt ? tz.fromTime(scheduleAt).utc().toDate() : null);
       setLoading(false);
     } catch (e) {
       setLoading(false);
@@ -78,10 +79,7 @@ export const FormLive = ({ item, getLive }: { item: Live, getLive: () => void })
       <Card className="w-full flex flex-col justify-between">
         <CardContent>
           <div className="flex flex-col gap-3 justify-center h-full">
-            <video className="w-full h-full object-cover rounded-md" controls>
-              <source src={getTenantUrl() + '/' + item.video.video} type="video/mp4" />
-              Your browser does not support the video tag.
-            </video>
+            <img src={getTenantUrl() + '/thumbnail/' + item.video.thumbnail} alt={item.title} className="w-full h-[180px] object-cover rounded-md" />
             <Label className="mt-4 text-lg">{item.title}</Label>
             <div className="grid gap-3">
               <Label htmlFor="key">Stream Key</Label>
@@ -104,10 +102,10 @@ export const FormLive = ({ item, getLive }: { item: Live, getLive: () => void })
               </div>
             </div>
             {
-            isSchedule &&
+              isSchedule &&
               <div className="grid gap-3">
                 <Label htmlFor="schedule">Schedule At?</Label>
-                <Input type="datetime-local" id="schedule" defaultValue={item.scheduleAt ? new Date(item.scheduleAt).toISOString().slice(0,16) : new Date().toISOString().slice(0,16)} name="schedule_at" />
+                <Input type="datetime-local" id="schedule" defaultValue={item.scheduleAt ? moment(item.scheduleAt).utc().local().format('YYYY-MM-DDTHH:mm') : tz.timezone.format('YYYY-MM-DDTHH:mm') } name="schedule_at" />
               </div>
             }
           </div>

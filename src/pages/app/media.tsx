@@ -69,10 +69,7 @@ const Media = (): JSX.Element => {
             <Card key={index} className="w-full flex flex-col justify-between">
               <CardContent>
                 <div className="flex flex-col justify-center h-full">
-                  <video className="w-full h-full object-cover rounded-md" controls>
-                    <source src={getTenantUrl() + '/' + item.video} type="video/mp4" />
-                    Your browser does not support the video tag.
-                  </video>
+                  <img src={getTenantUrl() + '/thumbnail/' + item.thumbnail} alt={item.title} className="w-full h-[180px] object-cover rounded-md" />
                   <Label className="mt-4 text-lg">{item.title}</Label>
                   <Label className="mt font-normal">{item.description}</Label>
                 </div>
