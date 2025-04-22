@@ -77,9 +77,9 @@ const Login = () => {
                 <Button disabled={isLoading} type="submit" className="w-full">
                   {isLoading ? 'Loading...' : 'Login'}
                 </Button>
-                <Button type="button" onClick={() => { }} variant="neutral" className="w-full">
+                {/* <Button type="button" onClick={() => { }} variant="neutral" className="w-full">
                   Login with Google
-                </Button>
+                </Button> */}
                 <div className="mt-4 text-center text-sm">
                   Don&apos;t have an account?{" "}
                   <a href="#" className="underline underline-offset-4">
