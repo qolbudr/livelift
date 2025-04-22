@@ -1,4 +1,4 @@
-import { FormEvent, JSX, useState } from "react";
+import { FormEvent, JSX, useEffect, useState } from "react";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { getTenantUrl } from "@/core/utils/tenant_url";
 import { Live } from "@/core/types/live";
@@ -22,6 +22,20 @@ export const FormLive = ({ item, getLive }: { item: Live, getLive: () => void })
   const [isConfirm, setConfirm] = useState<boolean>()
 
   const user = useUser();
+
+  useEffect(() => {
+    if (user && user!.package.scheduling) {
+      setSchedule(item.scheduleAt ? true : false);
+    } else {
+      setSchedule(false);
+    }
+
+    if(user && user!.package.video_looping) {
+      setLoop(item.loop ? true : false);
+    } else {
+      setLoop(false)
+    }
+  }, [user])
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, live: Live) => {
     try {

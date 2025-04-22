@@ -25,12 +25,12 @@ export const navigationItem: NavigationItem[] = [
   },
   {
     icon: <Icon.ClockHistory />,
-    href: "/app/generate",
+    href: "/app/history",
     label: "History",
   },
   {
     icon: <Icon.Power />,
-    href: "/app/generate",
+    href: "/logout",
     label: "Logout",
     onClick: () => {
       localStorage.clear();

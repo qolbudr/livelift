@@ -7,15 +7,26 @@ import { MediaRepository } from "@/core/repository/media_repository";
 import { toast } from "sonner";
 import { handleError } from "@/core/utils/handle_error";
 import { LiveRepository } from "@/core/repository/live_repository";
+import { HistoryRepository } from "@/core/repository/history_repository";
 
 const Dashboard = (): JSX.Element => {
   const [countVideo, setCountVideo] = useState(0);
   const [countLive, setCountLive] = useState(0);
+  const [countHistory, setHistory] = useState(0);
 
   const getVideoCount = async () => {
     try {
       const response = await MediaRepository.getMedia();
       setCountVideo(response?.count ?? 0);
+    } catch (e) {
+      toast.error(handleError(e));
+    }
+  }
+
+  const getHistoryCount = async () => {
+    try {
+      const response = await HistoryRepository.getHistory();
+      setHistory(response?.count ?? 0);
     } catch (e) {
       toast.error(handleError(e));
     }
@@ -33,6 +44,7 @@ const Dashboard = (): JSX.Element => {
   useEffect(() => {
     getVideoCount();
     getLiveCount();
+    getHistoryCount();
   }, [])
 
   return <>
@@ -79,7 +91,7 @@ const Dashboard = (): JSX.Element => {
           <CardContent>
             <div className="flex items-center justify-between">
               <div className="card-text">
-                <h1 className="text-xl font-bold">10 Live</h1>
+                <h1 className="text-xl font-bold">{countHistory} Live</h1>
                 <p className="text-gray-600">Your total live started</p>
               </div>
               <div className="flex justify-center items-center card-icon rounded-sm border shadow-shadow w-10 h-10 bg-main">
