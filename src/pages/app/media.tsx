@@ -10,6 +10,7 @@ import { toast } from "sonner";
 import { handleError } from "@/core/utils/handle_error";
 import { getTenantUrl } from "@/core/utils/tenant_url";
 import { DialogConfirmation } from "@/components/dialog/dialog_confirmation";
+import Head from "next/head";
 
 const Media = (): JSX.Element => {
   const [video, setVideo] = useState<Video[]>([])
@@ -44,7 +45,10 @@ const Media = (): JSX.Element => {
   useEffect(() => { getMedia() }, [])
 
   return <>
-    <DialogConfirmation open={isConfirm} onClose={() => setConfirm(false)} onConfirm={() => deleteMedia(id)}/>
+    <Head>
+      <title>Livelift - Media</title>
+    </Head>
+    <DialogConfirmation open={isConfirm} onClose={() => setConfirm(false)} onConfirm={() => deleteMedia(id)} />
     {video.length == 0 &&
       <Card>
         <CardContent>

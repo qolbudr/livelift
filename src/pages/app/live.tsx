@@ -16,6 +16,7 @@ import { Live } from "@/core/types/live";
 import { Input } from "@/components/ui/input";
 import { Checkbox } from "@/components/ui/checkbox";
 import { FormLive } from "@/components/form/form_live";
+import Head from "next/head";
 
 const LivePage = (): JSX.Element => {
   const [live, setLive] = useState<Live[]>([])
@@ -32,6 +33,9 @@ const LivePage = (): JSX.Element => {
   useEffect(() => { getLive() }, [])
 
   return <>
+    <Head>
+      <title>Livelift - Live Stream</title>
+    </Head>
     {live.length == 0 &&
       <Card>
         <CardContent>
@@ -53,7 +57,7 @@ const LivePage = (): JSX.Element => {
         <DialogAddLive onAdd={getLive} />
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5 mt-5 items-stretch">
           {live.map((item, index) => (
-            <FormLive key={index} item={item} getLive={getLive}/>
+            <FormLive key={index} item={item} getLive={getLive} />
           ))}
         </div>
       </>

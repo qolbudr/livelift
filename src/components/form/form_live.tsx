@@ -12,6 +12,7 @@ import { LiveRepository } from "@/core/repository/live_repository";
 import { DialogConfirmation } from "@/components/dialog/dialog_confirmation";
 import tz from '@/core/utils/timezone';
 import moment from "moment-timezone";
+import { useUser } from "@/core/hook/use_user";
 
 export const FormLive = ({ item, getLive }: { item: Live, getLive: () => void }): JSX.Element => {
   const [isLoop, setLoop] = useState<boolean>(item.loop ? true : false);
@@ -19,6 +20,8 @@ export const FormLive = ({ item, getLive }: { item: Live, getLive: () => void })
   const [loading, setLoading] = useState<boolean>(false);
   const [id, setId] = useState<number>(0)
   const [isConfirm, setConfirm] = useState<boolean>()
+
+  const user = useUser();
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>, live: Live) => {
     try {
@@ -89,23 +92,23 @@ export const FormLive = ({ item, getLive }: { item: Live, getLive: () => void })
               <Label htmlFor="rtmp">RTMP URL</Label>
               <Input type="url" id="rtmp" name="rtmp_url" defaultValue={item.rtmpUrl} placeholder="RTMP URL" required />
             </div>
-            <div className="grid gap-3 my-3">
+            {user && (user!.package.video_looping || user!.package.scheduling) && <div className="grid gap-3 my-3">
               <div className="flex items-center gap-x-4">
-                <div className="flex gap-x-2">
+                {user && user!.package.video_looping && <div className="flex gap-x-2">
                   <Checkbox onClick={() => setLoop(!isLoop)} id="loop" checked={isLoop ? true : false} />
                   <Label htmlFor="loop">Loop?</Label>
-                </div>
-                <div className="flex gap-x-2">
+                </div>}
+                {user && user!.package.scheduling && <div className="flex gap-x-2">
                   <Checkbox onClick={() => setSchedule(!isSchedule)} id="schedule" checked={isSchedule ? true : false} />
                   <Label htmlFor="schedule">Schedule?</Label>
-                </div>
+                </div>}
               </div>
-            </div>
+            </div>}
             {
-              isSchedule &&
+              user && user!.package.scheduling && isSchedule &&
               <div className="grid gap-3">
                 <Label htmlFor="schedule">Schedule At?</Label>
-                <Input type="datetime-local" id="schedule" defaultValue={item.scheduleAt ? moment(item.scheduleAt).utc().local().format('YYYY-MM-DDTHH:mm') : tz.timezone.format('YYYY-MM-DDTHH:mm') } name="schedule_at" />
+                <Input type="datetime-local" id="schedule" defaultValue={item.scheduleAt ? moment(item.scheduleAt).utc().local().format('YYYY-MM-DDTHH:mm') : tz.timezone.format('YYYY-MM-DDTHH:mm')} name="schedule_at" />
               </div>
             }
           </div>

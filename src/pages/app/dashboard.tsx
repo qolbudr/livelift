@@ -2,9 +2,13 @@ import { AdminLayout } from "@/components/layout/admin_layout";
 import { Card, CardContent } from "@/components/ui/card";
 import { JSX } from "react";
 import * as Icon from 'react-bootstrap-icons';
+import Head from "next/head";
 
 const Dashboard = (): JSX.Element => {
   return <>
+      <Head>
+        <title>Livelift - Dashboard</title>
+      </Head>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
         <Card className="col-span-1 lg:col-span-3">
           <CardContent>

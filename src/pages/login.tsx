@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label"
 import { GuestCtxProvider } from "@/core/provider/guest_context_provider";
 import { AuthRepository } from "@/core/repository/auth_repository";
 import { handleError } from "@/core/utils/handle_error";
+import Head from "next/head";
 import { useRouter } from "next/navigation";
 import { FormEvent, useState } from "react";
 import { toast } from "sonner";
@@ -33,6 +34,9 @@ const Login = () => {
 
   return (
     <GuestCtxProvider>
+      <Head>
+        <title>Livelift - Login</title>
+      </Head>
       <div className="flex flex-col items-center justify-center h-screen">
         <div className="px-3 md:px-0 max-w-[400px] w-full">
           <form onSubmit={handleSubmit}>

@@ -11,7 +11,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
   try {
     // Find user by email
-    const user = await prisma.users.findFirst({where: { email: { contains: email } }});
+    const user = await prisma.users.findFirst({include: { package: true }, where: { email: { contains: email } }});
     
     // Check if user exists
     if (!user) return res.status(401).send({message: 'Email atau password yang Anda masukkan salah. Silakan coba lagi.', code: 401});

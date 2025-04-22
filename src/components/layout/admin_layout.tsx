@@ -36,7 +36,7 @@ export const AdminLayout = ({ children }: { children: ReactNode }): JSX.Element 
 
           <div className="w-full flex items-stretch justify-end ms-auto gap-x-1 md:gap-x-3">
             <div className="flex flex-row items-stretch justify-end gap-1">
-              <div className="border-l h-full border-black mx-3.5" />
+              <div className="h-full border-black mx-3.5" />
               <Avatar className="size-8 lg:size-10">
                 <AvatarImage src="https://github.com/shadcn.png" alt="@shadcn" />
                 <AvatarFallback>CN</AvatarFallback>
