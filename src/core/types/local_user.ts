@@ -10,5 +10,5 @@ export type LocalUser = () => {
   tenant: string,
   createdAt: string,
   updatedAt: string,
-  package: Packages,
+  packages: Packages,
 }

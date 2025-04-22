@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { LocalUser } from '@/core/types/local_user';
 
-export const useUser = () : LocalUser | null => {
-  const [user, setUser] = useState<LocalUser | null>(null);
+export const useUser = () : any | null => {
+  const [user, setUser] = useState<any | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

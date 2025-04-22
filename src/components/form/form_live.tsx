@@ -24,7 +24,7 @@ export const FormLive = ({ item, getLive }: { item: Live, getLive: () => void })
   const user = useUser();
 
   useEffect(() => {
-    if (user && user!.package.scheduling) {
+    if (user && user!.phone.scheduling) {
       setSchedule(item.scheduleAt ? true : false);
     } else {
       setSchedule(false);
