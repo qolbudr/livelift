@@ -1,10 +1,40 @@
 import { AdminLayout } from "@/components/layout/admin_layout";
 import { Card, CardContent } from "@/components/ui/card";
-import { JSX } from "react";
+import { JSX, useEffect, useState } from "react";
 import * as Icon from 'react-bootstrap-icons';
 import Head from "next/head";
+import { MediaRepository } from "@/core/repository/media_repository";
+import { toast } from "sonner";
+import { handleError } from "@/core/utils/handle_error";
+import { LiveRepository } from "@/core/repository/live_repository";
 
 const Dashboard = (): JSX.Element => {
+  const [countVideo, setCountVideo] = useState(0);
+  const [countLive, setCountLive] = useState(0);
+
+  const getVideoCount = async () => {
+    try {
+      const response = await MediaRepository.getMedia();
+      setCountVideo(response?.count ?? 0);
+    } catch (e) {
+      toast.error(handleError(e));
+    }
+  }
+
+  const getLiveCount = async () => {
+    try {
+      const response = await LiveRepository.getLive();
+      setCountLive(response?.count ?? 0);
+    } catch (e) {
+      toast.error(handleError(e));
+    }
+  }
+
+  useEffect(() => {
+    getVideoCount();
+    getLiveCount();
+  }, [])
+
   return <>
       <Head>
         <title>Livelift - Dashboard</title>
@@ -21,7 +51,7 @@ const Dashboard = (): JSX.Element => {
           <CardContent>
             <div className="flex items-center justify-between">
               <div className="card-text">
-                <h1 className="text-xl font-bold">10 Video</h1>
+                <h1 className="text-xl font-bold">{countVideo} Video</h1>
                 <p className="text-gray-600">Your total uploaded video</p>
               </div>
               <div className="flex justify-center items-center card-icon rounded-sm border shadow-shadow w-10 h-10 bg-main">
@@ -35,8 +65,8 @@ const Dashboard = (): JSX.Element => {
           <CardContent>
             <div className="flex items-center justify-between">
               <div className="card-text">
-                <h1 className="text-xl font-bold">10 Stream</h1>
-                <p className="text-gray-600">Your total live stream</p>
+                <h1 className="text-xl font-bold">{countLive} Stream</h1>
+                <p className="text-gray-600">Your total stream</p>
               </div>
               <div className="flex justify-center items-center card-icon rounded-sm border shadow-shadow w-10 h-10 bg-main">
                 <Icon.Record2 className="size-6" />
@@ -49,8 +79,8 @@ const Dashboard = (): JSX.Element => {
           <CardContent>
             <div className="flex items-center justify-between">
               <div className="card-text">
-                <h1 className="text-xl font-bold">10 Minutes</h1>
-                <p className="text-gray-600">Your total minutes stream</p>
+                <h1 className="text-xl font-bold">10 Live</h1>
+                <p className="text-gray-600">Your total live started</p>
               </div>
               <div className="flex justify-center items-center card-icon rounded-sm border shadow-shadow w-10 h-10 bg-main">
                 <Icon.Clock />
