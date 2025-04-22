@@ -22,10 +22,13 @@ const Login = () => {
       const form = event.target as HTMLFormElement;
       const formData = new FormData(form);
       const email = formData.get('email') as string;
+      const name = formData.get('name') as string;
+      const phone = formData.get('phone') as string;
       const password = formData.get('password') as string;
-      const response = await AuthRepository.login(email, password);
+      const response = await AuthRepository.register(name, email, phone, password);
       setLoading(false);
-      router.push('/app/dashboard');
+      toast.success(response.message);
+      router.push('/login');
     }
     catch (e) {
       setLoading(false);
@@ -36,20 +39,45 @@ const Login = () => {
   return (
     <GuestCtxProvider>
       <Head>
-        <title>Livelift - Login</title>
+        <title>Livelift - Signup</title>
       </Head>
       <div className="flex flex-col items-center justify-center h-screen">
         <div className="px-3 md:px-0 max-w-[400px] w-full">
           <form onSubmit={handleSubmit}>
             <Card className="w-full">
               <CardHeader>
-                <CardTitle>Login to your account</CardTitle>
+                <CardTitle>
+                  Signup to your account
+                </CardTitle>
                 <CardDescription>
-                  Enter your email below to login to your account
+                  Enter your details below to create an account
                 </CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="flex flex-col gap-6">
+                  <div className="grid gap-2">
+                    <Label htmlFor="name">Name</Label>
+                    <Input
+                      id="name"
+                      type="text"
+                      name="name"
+                      placeholder="John Doe"
+                      required
+                    />
+                  </div>
+                  <div className="grid gap-2">
+                    <Label htmlFor="name">Phone</Label>
+                    <div className="flex items-center gap-2">
+                      <Label className="w-[50px] h-[38px] border-2 flex items-center justify-center bg-main rounded" htmlFor="phone">+62</Label>
+                      <Input
+                        id="phone"
+                        type="text"
+                        name="phone"
+                        placeholder="8123456789"
+                        required
+                      />
+                    </div>
+                  </div>
                   <div className="grid gap-2">
                     <Label htmlFor="email">Email</Label>
                     <Input
@@ -76,15 +104,15 @@ const Login = () => {
               </CardContent>
               <CardFooter className="flex-col gap-2">
                 <Button disabled={isLoading} type="submit" className="w-full">
-                  {isLoading ? 'Loading...' : 'Login'}
+                  {isLoading ? 'Loading...' : 'Signup'}
                 </Button>
                 {/* <Button type="button" onClick={() => { }} variant="neutral" className="w-full">
                   Login with Google
                 </Button> */}
                 <div className="mt-4 text-center text-sm">
-                  Don&apos;t have an account?{" "}
-                  <Link href="" onClick={() => router.replace('/signup')} className="underline underline-offset-4">
-                    Sign up
+                  Already have an account?{" "}
+                  <Link href="" onClick={() => router.replace('/login')} className="underline underline-offset-4">
+                    Login
                   </Link>
                 </div>
               </CardFooter>
