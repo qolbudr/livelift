@@ -10,7 +10,7 @@ read -p "Enter database name: " DB_NAME
 read -p "Enter database user: " DB_USER
 read -p "Enter database password: " DB_PASSWORD
 
-cp ENV.EXAMPLE .env
+cp .env.example .env
 
 # replace the placeholders in .env file with user input
 sed -i "s/DB_NAME/$DB_NAME/g" .env
