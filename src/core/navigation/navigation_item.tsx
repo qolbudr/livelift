@@ -29,6 +29,11 @@ export const navigationItem: NavigationItem[] = [
     label: "History",
   },
   {
+    icon: <Icon.Telegram />,
+    href: "https://t.me/fyconst",
+    label: "Contact Admin",
+  },
+  {
     icon: <Icon.Power />,
     href: "/logout",
     label: "Logout",

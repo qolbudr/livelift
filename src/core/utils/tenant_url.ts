@@ -4,7 +4,7 @@ export const getTenantUrl = (): string => {
   const tenant = userData?.tenant;
 
   if (!tenant) {
-    throw new Error("Tenant URL not found");
+    throw new Error("Akun belum aktif harap hubungi admin");
   }
 
   return tenant;
