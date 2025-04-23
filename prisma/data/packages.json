@@ -1,8 +1,8 @@
 [
   {
     "name": "Free",
-    "max_stream": 1,
-    "max_quality": 480,
+    "max_stream": 3,
+    "max_quality": 720,
     "video_looping": false,
     "watermark": true,
     "custom_logo": false,
@@ -11,32 +11,32 @@
   },
   {
     "name": "Creator",
-    "max_stream": 3,
-    "max_quality": 720,
-    "video_looping": true,
+    "max_stream": 5,
+    "max_quality": 1080,
+    "video_looping": false,
     "watermark": true,
     "custom_logo": false,
     "scheduling": false,
-    "price": 99000
+    "price": 139000
   },
   {
     "name": "Premium",
-    "max_stream": 7,
+    "max_stream": 10,
     "max_quality": 1080,
     "video_looping": true,
     "watermark": false,
     "custom_logo": true,
     "scheduling": true,
-    "price": 299000
+    "price": 249000
   },
   {
     "name": "Pro",
     "max_stream": 15,
     "max_quality": 4096,
     "video_looping": true,
-    "watermark": true,
+    "watermark": false,
     "custom_logo": true,
     "scheduling": true,
-    "price": 599000
+    "price": 499000
   }
 ]
