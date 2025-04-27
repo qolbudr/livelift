@@ -29,8 +29,8 @@ export const navigationItem: NavigationItem[] = [
     label: "History",
   },
   {
-    icon: <Icon.Telegram />,
-    href: "https://t.me/fyconst",
+    icon: <Icon.Whatsapp />,
+    href: "https://api.whatsapp.com/send?phone=628380097465",
     label: "Contact Admin",
   },
   {

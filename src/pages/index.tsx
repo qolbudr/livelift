@@ -39,8 +39,12 @@ const Home = () => {
     }
   };
 
-  const toTelegram = () => {
-    window.open('https://t.me/fyconst', '_blank');
+  const toWhatsapp = (paket: string) => {
+    window.open(`https://api.whatsapp.com/send?phone=628380097465&text=Halo%20MinLift!%20saya%20ingin%20memesan%20paket%20LiveLift%20${paket}!`, '_blank');
+  }
+
+  const toWhatsappMain = () => {
+    window.open(`https://api.whatsapp.com/send?phone=628380097465&text=Halo%20MinLift!%20saya%20ingin%20bertanya%20mengenai%20LiveLift`, '_blank');
   }
 
   return <>
@@ -83,7 +87,7 @@ const Home = () => {
               </Button>
             </div>
           </nav>
-          <div className={`bg-[#f2f7ff] fixed z-10 top-0 left-0 right-0 bottom-0 transition-all font-base space-y-4 p-5 flex flex-col justify-between ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+          <div className={`bg-[#f2f7ff] fixed z-20 top-0 left-0 right-0 bottom-0 transition-all font-base space-y-4 p-5 flex flex-col justify-between ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}>
             <div className="flex items-center justify-end w-full">
               <Button onClick={closeMenu} className="cursor-pointer">
                 <Icon.XLg />
@@ -280,7 +284,7 @@ const Home = () => {
                       <li>❌ Custom Logo</li>
                     </ul>
                   </div>
-                  <Button size="lg" onClick={toTelegram} className="w-full">Langganan Sekarang</Button>
+                  <Button size="lg" onClick={() => toWhatsapp('Creator')} className="w-full">Langganan Sekarang</Button>
                 </div>
               </CardContent>
             </Card>
@@ -302,7 +306,7 @@ const Home = () => {
                       <li>❌ Custom Logo</li>
                     </ul>
                   </div>
-                  <Button size="lg" onClick={toTelegram} className="w-full">Langganan Sekarang</Button>
+                  <Button size="lg" onClick={() => toWhatsapp('Premium')} className="w-full">Langganan Sekarang</Button>
                 </div>
               </CardContent>
             </Card>
@@ -324,7 +328,7 @@ const Home = () => {
                       <li>✅ Custom Logo</li>
                     </ul>
                   </div>
-                  <Button size="lg" onClick={toTelegram} className="w-full">Langganan Sekarang</Button>
+                  <Button size="lg" onClick={() => toWhatsapp('Pro')} className="w-full">Langganan Sekarang</Button>
                 </div>
               </CardContent>
             </Card>
@@ -388,6 +392,9 @@ const Home = () => {
           </div>
         </div>
       </div>
+    </div>
+    <div onClick={toWhatsappMain} className="bg-main size-20 border z-10 fixed bottom-5 right-5 rounded-full shadow-shadow flex items-center justify-center">
+      <Icon.Whatsapp className="size-8 text-white cursor-pointer"/>
     </div>
   </>
 }
