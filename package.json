@@ -34,6 +34,7 @@
     "react": "^19.0.0",
     "react-bootstrap-icons": "^1.11.5",
     "react-dom": "^19.0.0",
+    "react-scroll": "^1.9.3",
     "socket.io": "^4.8.1",
     "sonner": "^2.0.3",
     "tailwind-merge": "^3.2.0",
@@ -48,6 +49,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/react-scroll": "^1.8.10",
     "prisma": "^6.6.0",
     "tailwindcss": "^4",
     "typescript": "^5"

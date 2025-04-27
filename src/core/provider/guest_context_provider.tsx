@@ -38,7 +38,7 @@ export function GuestCtxProvider({ children }: Props) {
 
     setTimeout(() => {
       setIsLoading(false)
-    }, 1500)
+    }, 10)
   }, [])
 
   return <>

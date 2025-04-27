@@ -13,7 +13,7 @@
     "name": "Creator",
     "max_stream": 5,
     "max_quality": 1080,
-    "video_looping": false,
+    "video_looping": true,
     "watermark": true,
     "custom_logo": false,
     "scheduling": false,
