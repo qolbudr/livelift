@@ -40,11 +40,11 @@ const Home = () => {
   };
 
   const toWhatsapp = (paket: string) => {
-    window.open(`https://api.whatsapp.com/send?phone=628380097465&text=Halo%20MinLift!%20saya%20ingin%20memesan%20paket%20LiveLift%20${paket}!`, '_blank');
+    window.open(`https://api.whatsapp.com/send?phone=6283809947465&text=Halo%20MinLift!%20saya%20ingin%20memesan%20paket%20LiveLift%20${paket}!`, '_blank');
   }
 
   const toWhatsappMain = () => {
-    window.open(`https://api.whatsapp.com/send?phone=628380097465&text=Halo%20MinLift!%20saya%20ingin%20bertanya%20mengenai%20LiveLift`, '_blank');
+    window.open(`https://api.whatsapp.com/send?phone=6283809947465&text=Halo%20MinLift!%20saya%20ingin%20bertanya%20mengenai%20LiveLift`, '_blank');
   }
 
   return <>
@@ -393,7 +393,7 @@ const Home = () => {
         </div>
       </div>
     </div>
-    <div onClick={toWhatsappMain} className="bg-main size-20 border z-10 fixed bottom-5 right-5 rounded-full shadow-shadow flex items-center justify-center">
+    <div onClick={toWhatsappMain} className="bg-main size-16 border z-10 fixed bottom-5 right-5 rounded-full shadow-shadow flex items-center justify-center">
       <Icon.Whatsapp className="size-8 text-white cursor-pointer"/>
     </div>
   </>

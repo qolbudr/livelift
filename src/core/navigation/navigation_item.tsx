@@ -30,7 +30,7 @@ export const navigationItem: NavigationItem[] = [
   },
   {
     icon: <Icon.Whatsapp />,
-    href: "https://api.whatsapp.com/send?phone=628380097465",
+    href: "https://api.whatsapp.com/send?phone=6283809947465",
     label: "Contact Admin",
   },
   {
