@@ -26,7 +26,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         email: email,
         password: encryptedPassword,
         packageId: 1,
-        tenant: "",
+        tenant: "https://tenant.livelift.site",
       },
     });
 

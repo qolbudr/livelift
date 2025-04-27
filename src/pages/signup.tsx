@@ -47,10 +47,10 @@ const Login = () => {
             <Card className="w-full">
               <CardHeader>
                 <CardTitle>
-                  Signup to your account
+                  Daftar ke Akun Anda
                 </CardTitle>
                 <CardDescription>
-                  Enter your details below to create an account
+                  Masukkan detail Anda di bawah ini untuk membuat akun
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -95,7 +95,7 @@ const Login = () => {
                         href="#"
                         className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                       >
-                        Forgot your password?
+                        Lupa password?
                       </a>
                     </div>
                     <Input id="password" type="password" name="password" placeholder="******" required />
@@ -110,9 +110,9 @@ const Login = () => {
                   Login with Google
                 </Button> */}
                 <div className="mt-4 text-center text-sm">
-                  Already have an account?{" "}
+                  Sudah punya akun?{" "}
                   <Link href="" onClick={() => router.replace('/login')} className="underline underline-offset-4">
-                    Login
+                    Masuk
                   </Link>
                 </div>
               </CardFooter>

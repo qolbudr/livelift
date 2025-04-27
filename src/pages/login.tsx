@@ -43,9 +43,9 @@ const Login = () => {
           <form onSubmit={handleSubmit}>
             <Card className="w-full">
               <CardHeader>
-                <CardTitle>Login to your account</CardTitle>
+                <CardTitle>Masuk ke Akun Anda</CardTitle>
                 <CardDescription>
-                  Enter your email below to login to your account
+                  Masukkan email Anda di bawah ini untuk masuk ke akun Anda
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -67,7 +67,7 @@ const Login = () => {
                         href="#"
                         className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
                       >
-                        Forgot your password?
+                        Lupa Password?
                       </a>
                     </div>
                     <Input id="password" type="password" name="password" placeholder="******" required />
@@ -82,9 +82,9 @@ const Login = () => {
                   Login with Google
                 </Button> */}
                 <div className="mt-4 text-center text-sm">
-                  Don&apos;t have an account?{" "}
+                  Belum punya akun?{" "}
                   <Link href="" onClick={() => router.replace('/signup')} className="underline underline-offset-4">
-                    Sign up
+                    Daftar
                   </Link>
                 </div>
               </CardFooter>
